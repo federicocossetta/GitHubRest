@@ -1,6 +1,7 @@
 package com.fcossetta.githubrest.api
 
 import com.fcossetta.githubrest.model.Repo
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
 
@@ -11,5 +12,5 @@ interface GitHubService {
     ): List<Repo>
 
     @GET("user")
-    suspend fun getUserToken(@Header("Autorization") h1: String): String
+    suspend fun getUserToken(@Header("Autorization") h1: String): Response<String>
 }

@@ -1,14 +1,18 @@
 package com.fcossetta.githubrest.di
 
-import com.fcossetta.githubrest.MainActivity
 import com.fcossetta.githubrest.MyApplication
 import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjectionModule
+import dagger.android.AndroidInjector
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [ApiModule::class, DatabaseModule::class])
-interface ApiComponent {
+@Component(
+    modules = [ApiModule::class, DatabaseModule::class, AndroidInjectionModule::class,
+        ActivitiesModule::class, FragmentsModule::class]
+)
+interface ApiComponent : AndroidInjector<MyApplication> {
 
 
     @Component.Builder
@@ -23,5 +27,4 @@ interface ApiComponent {
 
     }
 
-    fun inject(activity: MainActivity?)
 }

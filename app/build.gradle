@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
 }
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
 
@@ -58,8 +59,9 @@ dependencies {
 
 
     //dagger
-    implementation "com.google.dagger:dagger:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
     //navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
