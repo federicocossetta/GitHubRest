@@ -9,7 +9,7 @@ class MyApplication : Application() {
 
 
     val apiComponent: ApiComponent by lazy {
-        DaggerApiComponent.builder().application(this).build()
+        DaggerApiComponent.builder().application(this).baseUrl("https://api.github.com").build()
     }
 
     override fun getApplicationInfo(): ApplicationInfo {

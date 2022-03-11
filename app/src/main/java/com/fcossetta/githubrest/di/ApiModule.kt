@@ -18,9 +18,6 @@ import javax.inject.Singleton
 @Module
 class ApiModule   {
 
-
-
-
     @Provides
     @Singleton
     fun provideOkhttpClient(): OkHttpClient? {
@@ -39,10 +36,10 @@ class ApiModule   {
 
     @Provides
     @Singleton
-    fun provideRetrofit(moshi: Moshi, okHttpClient: OkHttpClient?): Retrofit {
+    fun provideRetrofit(moshi: Moshi, okHttpClient: OkHttpClient?,baseUrl : String): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .baseUrl(" https://api.github.com")
+            .baseUrl(baseUrl)
             .client(okHttpClient)
             .build()
     }
