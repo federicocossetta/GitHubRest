@@ -6,14 +6,14 @@ import androidx.room.Insert
 import androidx.room.Query
 
 @Dao
-interface DatabaseDao {
+interface RepoDao {
 
     @Query("SELECT * FROM databases WHERE auth_token LIKE :query")
-    fun databases(query: String): List<Database?>?
+    fun databases(query: String): List<Repo?>?
 
     @Insert
-    fun insertAll(vararg users: Database?)
+    fun insertAll(vararg users: Repo?)
 
     @Delete
-    fun delete(user: Database?)
+    fun delete(user: Repo?)
 }

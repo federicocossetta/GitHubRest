@@ -4,8 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Federico/Documents/GitHubRest/app/src/main/res/layout/fragment_loading.xml" value="0.2265625" />
+        <entry key="..\:/Users/Federico/Documents/GitHubRest/app/src/main/res/layout/fragment_loading2.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/Federico/Documents/GitHubRest/app/src/main/res/layout/login_fragment.xml" value="0.2942708333333333" />
         <entry key="..\:/Users/Federico/Documents/GitHubRest/app/src/main/res/layout/main_activity.xml" value="0.19427083333333334" />
+        <entry key="..\:/Users/Federico/Documents/GitHubRest/app/src/main/res/layout/main_fragment.xml" value="0.19427083333333334" />
       </map>
     </option>
   </component>

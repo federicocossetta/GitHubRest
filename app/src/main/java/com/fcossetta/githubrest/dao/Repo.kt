@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "databases")
-class Database {
+class Repo {
     @PrimaryKey
     var uid = 0
 
