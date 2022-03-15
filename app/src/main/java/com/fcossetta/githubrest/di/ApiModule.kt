@@ -1,22 +1,19 @@
 package com.fcossetta.githubrest.di
 
-import com.fcossetta.githubrest.MyApplication
 import com.fcossetta.githubrest.api.GitHubService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
-import okhttp3.Cache
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import javax.inject.Inject
-import javax.inject.Named
 import javax.inject.Singleton
 
 
 @Module
-class ApiModule   {
+class ApiModule {
 
     @Provides
     @Singleton
@@ -36,7 +33,7 @@ class ApiModule   {
 
     @Provides
     @Singleton
-    fun provideRetrofit(moshi: Moshi, okHttpClient: OkHttpClient?,baseUrl : String): Retrofit {
+    fun provideRetrofit(moshi: Moshi, okHttpClient: OkHttpClient?, baseUrl: String): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .baseUrl(baseUrl)

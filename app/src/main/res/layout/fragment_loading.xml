@@ -18,7 +18,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:src="@mipmap/github_embed" />
+        android:src="@drawable/logo" />
 
     <ProgressBar
         app:layout_constraintRight_toRightOf="parent"

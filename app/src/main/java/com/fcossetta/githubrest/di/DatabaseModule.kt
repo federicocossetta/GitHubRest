@@ -17,7 +17,7 @@ class DatabaseModule() {
         return Room.databaseBuilder(
             application.applicationContext,
             AppDatabase::class.java, "users-db"
-        ).build()
+        ).fallbackToDestructiveMigration().build()
     }
 
 }

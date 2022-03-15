@@ -1,13 +1,15 @@
 package com.fcossetta.githubrest.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.fcossetta.githubrest.api.GitHubService
+import com.fcossetta.githubrest.dao.User
 import com.fcossetta.githubrest.databinding.LoginFragmentBinding
 import com.fcossetta.githubrest.model.AppDatabase
 import dagger.android.support.AndroidSupportInjection
@@ -44,16 +46,45 @@ class LoginFragment : Fragment() {
         AndroidSupportInjection.inject(this)
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         binding.loginButton.setOnClickListener {
-            viewModel.login(
-                gitHubService, binding.username.editText!!.text.toString(), binding.passwod
-                    .editText!!.text.toString()
-            ).observe(
-                viewLifecycleOwner
-            ) {
-                Log.e(TAG, "onActivityCreated: $it")
-            }
+            performLogin()
         }
 
+    }
+
+    private fun performLogin() {
+        viewModel.login(
+            gitHubService, binding.username.editText!!.text.toString(), binding.passwod
+                .editText!!.text.toString()
+        ).observe(
+            viewLifecycleOwner, Observer {
+                if (it.isSuccess()) {
+                    val user = User()
+                    user.token = it.data
+                    appDatabase.userDao().insertAll(user)
+                    fetchRepos(user)
+                } else {
+                    Toast.makeText(context, "An error has occurred, retry", Toast.LENGTH_SHORT).show()
+                }
+            }
+        )
+    }
+
+    private fun fetchRepos(user: User) {
+        user.token?.let {
+            viewModel.fetchRepos(gitHubService, it).observe(viewLifecycleOwner) { data ->
+                run {
+                    if (data.isSuccess()) {
+                        data.data?.toTypedArray()
+                            ?.forEach { repo -> appDatabase.databaseDao().insertAll(repo) }
+                    } else {
+                        Toast.makeText(context, "An error has occurred, retry", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+
+            }
+
+        }
     }
 
 }
